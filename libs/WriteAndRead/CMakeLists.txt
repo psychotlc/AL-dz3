@@ -6,3 +6,4 @@ add_library(WriteAndRead STATIC
             write.cpp 
             read.cpp
 )
+target_link_libraries(WriteAndRead graphs)

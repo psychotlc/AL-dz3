@@ -1,1 +1,2 @@
-void read(char* file_name);
+#include <string>
+void read(std::string file_name);

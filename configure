@@ -6,4 +6,9 @@ fi
 cd build
 cmake -G "Unix Makefiles" ..
 cmake --build .
-mv dz3 ..
+
+tmp=$(ls)
+
+if [[ "$tmp" == *"dz3"* ]]; then
+    mv dz3 ..
+fi
