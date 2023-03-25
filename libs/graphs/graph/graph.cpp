@@ -2,6 +2,16 @@
 
 #include <iostream>
 #include <algorithm>
+#include <math.h>
+
+class Point{
+public:
+    Point(int n) {
+        this->position = n;
+    }
+    int position;
+    std::vector<int> way;
+};
 
 graph::graph() :n(0), Matrix(0)  {}
 
@@ -23,23 +33,50 @@ void graph::setElement(int i, int j, int Element){
 
 std::vector <int> graph::ShortestWay(int begin, int end){
     std::vector <int> allVisitedPoint = {begin};
-    std::vector < std::vector<int> > visitedPoints;
-    visitedPoints.push_back({begin});
-    bool AllPointsAreVisited = false;
+    std::vector <Point> points;
+    Point tmp(begin);
+    tmp.way.push_back(begin);
+    points.push_back(tmp);
+    int size = points.size();
 
-    while (!AllPointsAreVisited){
-        for (auto it = visitedPoints.begin(); it != visitedPoints.end(); it++){
-            auto currentPoint = *(--((*it).end()));
-            for (int i = 0; i < n; i++) {
-                if (this->Matrix[currentPoint][i] != 0) 
+    for (int k = 0; k < size; k++){
+        for (int i = 0; i < n; i++){
+            auto j = points[k].way[points[k].way.size() - 1];
+            if (Matrix[j][i] != 0){
                 if (std::count(allVisitedPoint.begin(), allVisitedPoint.end(), i) == 0){
-                    auto tmp = (*it);
-                    tmp.push_back(i);
-                    if (i == end) return tmp;
-                    visitedPoints.push_back(tmp);
+                    
+                    tmp = points[k];
+                    tmp.way.push_back(i);
+                    points.push_back(tmp);
+                    size++;
+                    if (i == end) return tmp.way;
+                    allVisitedPoint.push_back(i);
+                    
                 }
             }
         }
     }
+    std::cout << n;
     return {0};
+    
+};
+
+int graph::getN() const {
+    return this->n;
+};
+
+graph::graph(std::vector <int> other): graph(pow(other.size(), 0.5)) {
+        
+    for (int i = 0; i < n; i++){
+        for (int j = 0; j < n; j++){
+            Matrix[i][j] = other[n * i + j];
+        }
+    }
+};
+
+void graph::print(){
+    for (int i = 0; i < n; i++){
+        for (int j = 0; j < n; j++) std::cout<<Matrix[i][j] << " ";
+        std::cout << std::endl;
+    }
 };
