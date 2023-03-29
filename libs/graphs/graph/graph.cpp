@@ -4,14 +4,7 @@
 #include <algorithm>
 #include <math.h>
 
-class Point{
-public:
-    Point(int n) {
-        this->position = n;
-    }
-    int position;
-    std::vector<int> way;
-};
+
 
 graph::graph() :n(0), Matrix(0)  {}
 
@@ -51,13 +44,23 @@ std::vector <int> graph::ShortestWay(int begin, int end){
                     size++;
                     if (i == end) return tmp.way;
                     allVisitedPoint.push_back(i);
+                }
+            }
+            if (Matrix[i][j] != 0){
+                if (std::count(allVisitedPoint.begin(), allVisitedPoint.end(), j) == 0){
                     
+                    tmp = points[k];
+                    tmp.way.push_back(j);
+                    points.push_back(tmp);
+                    size++;
+                    if (j == end) return tmp.way;
+                    allVisitedPoint.push_back(i);
                 }
             }
         }
     }
     std::cout << n;
-    return {0};
+    return {-1};
     
 };
 

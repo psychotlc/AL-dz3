@@ -5,6 +5,6 @@
 using namespace std;
 
 int main(int argc, char* argv[]){
-    if (string(argv[1]) == "read") read(argv[2]);
+    read(argv[1]);
     return 0;
 }

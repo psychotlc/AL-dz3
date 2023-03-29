@@ -12,10 +12,15 @@ void read(std::string file_name){
 
     std::string stringtmp = "";
     std::vector <int> intTmp;
-    while (!file.eof()){
-        file >> stringtmp;
-        intTmp.push_back(std::stoi(stringtmp));
-    }
+    try{
+        while (!file.eof()){
+            file >> stringtmp;
+            intTmp.push_back(std::stoi(stringtmp));
+        }
+    } catch( std::invalid_argument e){
+        std::cout << "InCorrect input" << std::endl;
+        return;
+        };
     intTmp.pop_back();
     graph tmp(intTmp);
     auto result = tmp.ShortestWay(0, 3);

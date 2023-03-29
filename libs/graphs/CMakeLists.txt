@@ -4,5 +4,4 @@ project (graphs)
 
 add_library(graphs STATIC
     graph/graph.cpp
-    orgraph/orgraph.cpp
 )

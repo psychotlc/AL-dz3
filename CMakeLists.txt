@@ -10,4 +10,4 @@ add_subdirectory(libs/Read)
 add_executable(dz3
     app/main.cpp
 )
-target_link_libraries(dz3 graphs Read)
+target_link_libraries(dz3 Read)
