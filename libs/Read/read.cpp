@@ -7,8 +7,8 @@
 
 
 void read(std::string file_name){
-    std::ifstream file(file_name,std::ios_base::binary);
     
+    std::ifstream file(file_name,std::ios_base::binary);
 
     std::string stringtmp = "";
     std::vector <int> intTmp;

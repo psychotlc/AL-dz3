@@ -21,7 +21,7 @@ graph::graph(graph& other)
 }
 
 graph::graph(std::vector <int> other): graph(sqrt(other.size())) {
-    
+    if (!(this->n * this->n == other.size())) throw error("Incorrect input: it's not a matrix\n");
     for (int i = 0; i < n; i++){
         for (int j = 0; j < n; j++){
             Matrix[i][j] = other[n * i + j];
