@@ -52,8 +52,9 @@ std::vector <int> graph::ShortestWay(int begin, int end){
     int size = points.size();
 
     for (int k = 0; k < size; k++){
+        auto j = points[k].way[points[k].way.size() - 1];
         for (int i = 0; i < n; i++){
-            auto j = points[k].way[points[k].way.size() - 1];
+            
             if (Matrix[j][i] != 0){
                 if (std::count(allVisitedPoint.begin(), allVisitedPoint.end(), i) == 0){
                     
@@ -65,22 +66,11 @@ std::vector <int> graph::ShortestWay(int begin, int end){
                     allVisitedPoint.push_back(i);
                 }
             }
-            else if (Matrix[i][j] != 0){
-                if (std::count(allVisitedPoint.begin(), allVisitedPoint.end(), j) == 0){
-                    
-                    tmp = points[k];
-                    tmp.way.push_back(j);
-                    points.push_back(tmp);
-                    size++;
-                    if (j == end) return tmp.way;
-                    allVisitedPoint.push_back(i);
-                }
-            }
         }
     }
     
-    error e("There is no way");
-    throw e;
+    throw error("There is no way");
+    
     
 };
 
