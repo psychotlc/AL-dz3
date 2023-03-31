@@ -20,11 +20,30 @@ graph::graph(graph& other)
         for (int j = 0; j < n; j++) Matrix[i][j] = other.Matrix[i][j];
 }
 
+graph::graph(std::vector <int> other): graph(sqrt(other.size())) {
+    
+    for (int i = 0; i < n; i++){
+        for (int j = 0; j < n; j++){
+            Matrix[i][j] = other[n * i + j];
+        }
+    }
+};
+
 void graph::setElement(int i, int j, int Element){
     Matrix[i][j] = Element;
 };
 
 std::vector <int> graph::ShortestWay(int begin, int end){
+    if (this->n <= end || end < 0) {
+        throw error("Incorrect end point");
+        
+    }
+
+    if (begin >= this->n || begin < 0){
+        throw error("Incorrect begin point");
+        
+    }
+
     std::vector <int> allVisitedPoint = {begin};
     std::vector <Point> points;
     Point tmp(begin);
@@ -46,7 +65,7 @@ std::vector <int> graph::ShortestWay(int begin, int end){
                     allVisitedPoint.push_back(i);
                 }
             }
-            if (Matrix[i][j] != 0){
+            else if (Matrix[i][j] != 0){
                 if (std::count(allVisitedPoint.begin(), allVisitedPoint.end(), j) == 0){
                     
                     tmp = points[k];
@@ -59,8 +78,9 @@ std::vector <int> graph::ShortestWay(int begin, int end){
             }
         }
     }
-    std::cout << n;
-    return {-1};
+    
+    error e("There is no way");
+    throw e;
     
 };
 
@@ -68,14 +88,7 @@ int graph::getN() const {
     return this->n;
 };
 
-graph::graph(std::vector <int> other): graph(pow(other.size(), 0.5)) {
-        
-    for (int i = 0; i < n; i++){
-        for (int j = 0; j < n; j++){
-            Matrix[i][j] = other[n * i + j];
-        }
-    }
-};
+
 
 void graph::print(){
     for (int i = 0; i < n; i++){

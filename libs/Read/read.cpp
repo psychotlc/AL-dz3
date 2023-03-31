@@ -19,11 +19,16 @@ void read(std::string file_name){
         }
     } catch( std::invalid_argument e){
         std::cout << "InCorrect input" << std::endl;
+        file.close();
         return;
-        };
+    };
     intTmp.pop_back();
-    graph tmp(intTmp);
-    auto result = tmp.ShortestWay(0, 3);
-    for (auto it = result.begin(); it != result.end(); it++) std::cout << *it;
+    try{
+        graph tmp(intTmp);
+        auto result = tmp.ShortestWay(0, 3);
+        for (auto it = result.begin(); it != result.end(); it++) std::cout << *it;
+    } catch(error e) {std::cout << e.what() << std::endl;};
+    
+    
     file.close();
 };
