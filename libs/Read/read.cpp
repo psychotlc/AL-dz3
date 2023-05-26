@@ -25,8 +25,14 @@ void read(std::string file_name){
     intTmp.pop_back();
     try{
         graph tmp(intTmp);
-        auto result = tmp.ShortestWay(0, 3);
-        for (auto it = result.begin(); it != result.end(); it++) std::cout << *it;
+        auto result = tmp.AllWays(0, 2);
+        for (auto it = result.begin(); it != result.end(); it++) {
+            for (auto it1 = (*it).begin(); it1 != (*it).end(); it1++){
+                std::cout << (*it1) << " ";
+            }
+            std::cout << std::endl;
+        };
+        
     } catch(error e) {std::cout << e.what() << std::endl;};
     
     

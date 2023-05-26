@@ -4,29 +4,26 @@
 #include <vector>
 #include <string>
 
-class Point{
-public:
-    Point(int n) {
-        this->position = n;
-    }
-    int position;
-    std::vector<int> way;
-};
 
 class graph{
     
 public:
+
     graph();
     graph(int N) ;
     graph(graph& other) ;
     graph(std::vector <int> other);
     void setElement(int i, int j, int Element);
-    virtual std::vector <int> ShortestWay(int begin, int end);
+    std::vector <std::vector <int> > AllWays(int begin, int end);
     void print();
     int getN() const;
-protected:
+
+private:
+
     std::vector <std::vector <int> > Matrix;
-    int n;
+    int size;
+    std::vector<std::vector <int> > ways;
+    void AllWaysRecursive(int begin, int end, std::vector<int>& way);
     
 };
 
