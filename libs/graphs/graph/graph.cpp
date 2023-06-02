@@ -51,6 +51,7 @@ std::vector <std::vector <int> > graph::AllWays(int begin, int end){
     ways.clear();
     std::vector <int> way;
     AllWaysRecursive(begin, end, way);
+    if (ways.size() == 0) throw (error("No ways"));
     return ways;
 };
 
@@ -62,7 +63,7 @@ void graph::AllWaysRecursive(int begin, int end, std::vector<int>& way){
     }
 
     for (int i = 0; i < size; i++){
-        if ( Matrix[begin][i] == 1){
+        if ( Matrix[begin][i] != 0){
             if (! std::count(way.begin(), way.end(), i)){
                 AllWaysRecursive(i, end, way);
                 way.pop_back();
